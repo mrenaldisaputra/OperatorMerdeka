@@ -5,8 +5,10 @@ Aplikasi web untuk operator games/event yang memudahkan kontrol audio selama aca
 ## Fitur
 
 ### 🎵 Kontrol Audio Lengkap
-- **Background Games**: BacksoundGames1 & BacksoundGames2 dengan dropdown selector
-- **Aura Framing Song**: Track terpisah dengan kontrol independen
+- **Background Music**: Dropdown dengan pilihan lengkap:
+  - BacksoundGames1 & BacksoundGames2 
+  - AuraFramingSong
+  - LaguBetawi1, LaguBetawi2, LaguBetawi3, LaguBetawi4
 - **SFX Benar**: Sound effect untuk jawaban benar
 - **SFX Salah**: Sound effect untuk jawaban salah
 - **Volume Control**: Slider volume individual untuk setiap audio
@@ -39,9 +41,15 @@ OperatorMerdeka/
 ├── script.js           # JavaScript functionality
 ├── README.md           # Documentation
 └── audio/
-    ├── BacksoundGames1.mp3  # Background music
-    ├── SFX_BENAR.mp3        # Sound effect benar
-    └── SFX_SALAH.mp3        # Sound effect salah
+    ├── BacksoundGames1.mp3   # Background music games
+    ├── BacksoundGames2.mp3   # Background music games
+    ├── AuraFramingSong.mp3   # Aura framing music
+    ├── LaguBetawi1.mp3       # Lagu betawi 1
+    ├── LaguBetawi2.mp3       # Lagu betawi 2
+    ├── LaguBetawi3.mp3       # Lagu betawi 3
+    ├── LaguBetawi4.mp3       # Lagu betawi 4
+    ├── SFX_BENAR.mp3         # Sound effect benar
+    └── SFX_SALAH.mp3         # Sound effect salah
 ```
 
 ## Cara Penggunaan
