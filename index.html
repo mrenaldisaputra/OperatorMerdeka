@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operator Audio Control - Event Games</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-gamepad"></i> Operator Audio Control</h1>
+            <p>Kontrol Audio untuk Event & Games</p>
+        </header>
+
+        <main class="main-content">
+            <div class="audio-grid">
+                <!-- Background Music Games -->
+                <div class="audio-card bg-music">
+                    <div class="card-header">
+                        <i class="fas fa-gamepad"></i>
+                        <h3>Background Games</h3>
+                    </div>
+                    <div class="audio-info">
+                        <label for="bgMusicSelect">Pilih Lagu:</label>
+                        <select id="bgMusicSelect" class="bg-music-select">
+                            <option value="BacksoundGames1.mp3">🎮 BacksoundGames1</option>
+                            <option value="BacksoundGames2.mp3">🎮 BacksoundGames2</option>
+                            <option value="AuraFramingSong.mp3">✨ AuraFramingSong</option>
+                        </select>
+                        <span class="audio-name" id="bgMusicName">BacksoundGames1.mp3</span>
+                        <div class="volume-control">
+                            <i class="fas fa-volume-down"></i>
+                            <input type="range" id="bgVolume" min="0" max="100" value="50" class="volume-slider">
+                            <i class="fas fa-volume-up"></i>
+                        </div>
+                    </div>
+                    <div class="controls">
+                        <button class="btn play-btn" onclick="playAudio('background')">
+                            <i class="fas fa-play"></i> Play
+                        </button>
+                        <button class="btn pause-btn" onclick="pauseAudio('background')">
+                            <i class="fas fa-pause"></i> Pause
+                        </button>
+                        <button class="btn stop-btn" onclick="stopAudio('background')">
+                            <i class="fas fa-stop"></i> Stop
+                        </button>
+                    </div>
+                    <div class="time-control">
+                        <span class="time-display">
+                            <span id="bgCurrentTime">0:00</span> / <span id="bgDuration">0:00</span>
+                        </span>
+                        <span class="time-remaining" id="bgTimeRemaining">-0:00</span>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar" onclick="seekAudio(event, 'background')">
+                            <div class="progress" id="bgProgress"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sound Effect Benar -->
+                <div class="audio-card sfx-correct">
+                    <div class="card-header">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>SFX Jawaban Benar</h3>
+                    </div>
+                    <div class="audio-info">
+                        <span class="audio-name">SFX_BENAR.mp3</span>
+                        <div class="volume-control">
+                            <i class="fas fa-volume-down"></i>
+                            <input type="range" id="correctVolume" min="0" max="100" value="80" class="volume-slider">
+                            <i class="fas fa-volume-up"></i>
+                        </div>
+                    </div>
+                    <div class="controls">
+                        <button class="btn play-btn" onclick="playAudio('correct')">
+                            <i class="fas fa-play"></i> Play
+                        </button>
+                        <button class="btn stop-btn" onclick="stopAudio('correct')">
+                            <i class="fas fa-stop"></i> Stop
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Sound Effect Salah -->
+                <div class="audio-card sfx-wrong">
+                    <div class="card-header">
+                        <i class="fas fa-times-circle"></i>
+                        <h3>SFX Jawaban Salah</h3>
+                    </div>
+                    <div class="audio-info">
+                        <span class="audio-name">SFX_SALAH.mp3</span>
+                        <div class="volume-control">
+                            <i class="fas fa-volume-down"></i>
+                            <input type="range" id="wrongVolume" min="0" max="100" value="80" class="volume-slider">
+                            <i class="fas fa-volume-up"></i>
+                        </div>
+                    </div>
+                    <div class="controls">
+                        <button class="btn play-btn" onclick="playAudio('wrong')">
+                            <i class="fas fa-play"></i> Play
+                        </button>
+                        <button class="btn stop-btn" onclick="stopAudio('wrong')">
+                            <i class="fas fa-stop"></i> Stop
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Controls -->
+            <div class="quick-controls">
+                <h3><i class="fas fa-bolt"></i> Quick Controls</h3>
+                <div class="quick-buttons">
+                    <button class="btn quick-btn correct-quick" onclick="playAudio('correct')">
+                        <i class="fas fa-check"></i>
+                        Benar
+                    </button>
+                    <button class="btn quick-btn wrong-quick" onclick="playAudio('wrong')">
+                        <i class="fas fa-times"></i>
+                        Salah
+                    </button>
+                    <button class="btn quick-btn stop-all" onclick="stopAllAudio()">
+                        <i class="fas fa-stop-circle"></i>
+                        Stop All
+                    </button>
+                </div>
+            </div>
+
+            <!-- Status Panel -->
+            <div class="status-panel">
+                <div class="status-item">
+                    <span class="status-label">Status:</span>
+                    <span class="status-value" id="currentStatus">Ready</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Currently Playing:</span>
+                    <span class="status-value" id="currentlyPlaying">None</span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Audio Elements -->
+    <audio id="backgroundAudio" loop>
+        <source id="bgSource" src="audio/BacksoundGames1.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="correctAudio">
+        <source src="audio/SFX_BENAR.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="wrongAudio">
+        <source src="audio/SFX_SALAH.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
